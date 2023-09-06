@@ -1,11 +1,93 @@
 .app {
-    margin: 20px;
+    margin: 20px 20px 15px 20px;
 
     .header {
         .logo {
             color: rgb(18, 42, 202);
             text-decoration: none;
             margin-bottom: 20px;
+        }
+        margin-bottom: 50px;
+    }
+
+    .search-bar {
+        text-align: right;
+        display: block;
+        margin-bottom:  30px;
+        .counter {
+            display: inline-block;
+            margin-right: 20px;
+            border-radius: 5px;
+            background-color: rgb(73, 222, 248);
+            padding: 8px;
+        }
+        
+        input {
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+    }
+
+    .list-flex {
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 40px;
+        justify-content: center;
+
+        .item {
+            flex: 1 0 300px;
+            vertical-align: top;
+            max-width: 300px;
+            height: 250px;
+            position: relative;
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: 25% 75%;
+            z-index: 1;
+            
+            img {
+                border-radius: 50%;
+                position: absolute;
+                left: 0;
+                right: 0;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                height: 150px;
+                width: 150px;
+                z-index: 3;
+                border: 1px solid;
+            }
+
+            .item-child-container {
+                box-shadow: 0px 4px 5px 2px #aaaaaa;
+                z-index: 2;
+                display: grid;
+                grid-template-columns: 100%;
+                grid-template-rows: 70% 20%;
+                text-align: center;
+                
+                .title {
+                    margin: auto auto 0px auto;
+                    display: block;
+                    font-size: 17px;
+                    color: black;
+                    height: fit-content;
+                }
+
+                .author {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: block;
+                    font-size: 14px;
+                    color: rgb(104, 104, 104);
+                    height: fit-content;
+                }
+            }
+
         }
     }
 }
