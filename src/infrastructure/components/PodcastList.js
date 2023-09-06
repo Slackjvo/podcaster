@@ -1,11 +1,12 @@
 import { useState, useEffect} from 'react'
 import { podcastService } from '../../domain/services/PodcastService'
 import SearchBar from './SearchBar'
+import { Link } from "react-router-dom"
 
 export default function PodcastList() {
     const [podcasts, setPodcasts] = useState([])
     const [podcastsFiltered, setPodcastsFiltered] = useState([])
-
+    
     useEffect( () => {
         const getPodcasts = async() => {
             try {
@@ -29,7 +30,7 @@ export default function PodcastList() {
                     <div className='list-flex'>
                         {podcastsFiltered.map( podcast => {
                             return (
-                                <div className='item' key={podcast.id} >
+                                <Link to={`/podcast/${podcast.id}`} className='item' key={podcast.id} >
                                     <div>
                                         <img src={podcast.imageSrc} alt={`${podcast.title} Cover`} />
                                     </div>
@@ -37,7 +38,7 @@ export default function PodcastList() {
                                         <p className='title'>{podcast.title}</p>
                                         <p className='author'>Author: {podcast.artist}</p>
                                     </div>
-                                </div>
+                                </Link>
                             )})
                         }
                     </div>
