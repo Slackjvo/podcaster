@@ -2,6 +2,7 @@ import { podcastRepository } from "../../infrastructure/repositories/podcastRepo
 
 export const podcastService = {
 
-    getPodcasts: () => podcastRepository.getPodcasts()
+    getPodcasts: () => podcastRepository.getPodcasts(),
+    getPodcast: (id) => podcastRepository.getPodcast(id)
     
 }

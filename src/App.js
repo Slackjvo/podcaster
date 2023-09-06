@@ -1,12 +1,19 @@
 import Header from './infrastructure/components/Header'
 import './App.scss'
 import PodcastList from './infrastructure/components/PodcastList'
+import { Outlet } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 export default function App() {
+    const location = useLocation();
+  
     return (
         <div className="app">
             <Header />
-            <PodcastList />
+            {location.pathname === '/' &&
+                <PodcastList />
+            }
+            <Outlet />
         </div>
     )
 }
