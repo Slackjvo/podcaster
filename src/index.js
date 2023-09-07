@@ -11,12 +11,28 @@ import {
 import reportWebVitals from './reportWebVitals'
 import PodcastDetail from './infrastructure/components/PodcastListEpisodes'
 import PodcastEpisode from './infrastructure/components/PodcastEpisode'
+import { LoadingProvider } from './loadingContext'
+
+
+export const LoadingContext = React.createContext()
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<App />}>
-            <Route path="/podcast/:podcastId" element={<PodcastDetail />} />
-            <Route path="/podcast/:podcastId/episode/:episodeId" element={<PodcastEpisode />} />
+        <Route path="/" element={
+            <LoadingProvider>
+                <App />
+            </LoadingProvider>
+        }>
+            <Route path="/podcast/:podcastId" element={
+                <LoadingProvider>
+                    <PodcastDetail />
+                </LoadingProvider>
+            } />
+            <Route path="/podcast/:podcastId/episode/:episodeId" element={
+                <LoadingProvider>
+                    <PodcastEpisode />
+                </LoadingProvider>
+            } />
         </Route>
     )
 )

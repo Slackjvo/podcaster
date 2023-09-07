@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom'
 
 export default function App() {
     const location = useLocation()
-  
+    
     return (
         <div className="app">
             <Header />

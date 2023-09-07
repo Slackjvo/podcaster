@@ -1,14 +1,15 @@
 import { useState, useEffect} from 'react'
 import { podcastService } from '../../domain/services/PodcastService'
 import { useParams } from 'react-router-dom'
-import PodcastCard from './PodcastCard';
+import PodcastCard from './PodcastCard'
 import { Link } from "react-router-dom"
-
+import { useLoading } from '../../loadingContext'
 
 export default function PodcastListEpisodes() {
     const [podcast, setPodcast] = useState(null)
     const { podcastId } = useParams()
-    
+    const { dispatch } = useLoading()
+
     const getDurationString = (duration) => {
         const minutes = (duration / 60).toLocaleString('es-ES', {minimumIntegerDigits: 2, useGrouping:false})
         const seconds = (duration % 60).toLocaleString('es-ES', {minimumIntegerDigits: 2, useGrouping:false})
@@ -17,12 +18,14 @@ export default function PodcastListEpisodes() {
 
     useEffect( () => {
         const getPodcast = async() => {
+            dispatch({type: 'start'})
             try {
                 const podcastRaw = await podcastService.getPodcast(podcastId)
                 setPodcast(podcastRaw)
             } catch(err) {
                 console.log(`Error on retrieving podcast from api: ${err}`)
             }
+            dispatch({type: 'stop'})
         }
         
         if (podcastId) {
