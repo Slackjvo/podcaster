@@ -17,7 +17,7 @@ export default function PodcastCard({
             </div>
             <hr />
             <div className='description-podcast'>
-                <p className='title'>Description:</p>
+                <h1 className='title'>Description:</h1>
                 <p className='text'>{podcast.description}</p>
             </div>
         </div>

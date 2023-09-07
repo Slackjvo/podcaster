@@ -10,11 +10,13 @@ import {
 } from "react-router-dom"
 import reportWebVitals from './reportWebVitals'
 import PodcastDetail from './infrastructure/components/PodcastListEpisodes'
+import PodcastEpisode from './infrastructure/components/PodcastEpisode'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<App />}>
             <Route path="/podcast/:podcastId" element={<PodcastDetail />} />
+            <Route path="/podcast/:podcastId/episode/:episodeId" element={<PodcastEpisode />} />
         </Route>
     )
 )

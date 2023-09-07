@@ -1,15 +1,13 @@
 import { useState, useEffect} from 'react'
 import { podcastService } from '../../domain/services/PodcastService'
-import { useParams } from 'react-router-dom';
-import PodcastDetailModel from '../../domain/models/PodcastDetail'
-import PodcastEpisode from '../../domain/models/PodcastEpisode'
+import { useParams } from 'react-router-dom'
 import PodcastCard from './PodcastCard';
 import { Link } from "react-router-dom"
 
 
 export default function PodcastListEpisodes() {
     const [podcast, setPodcast] = useState(null)
-    const { podcastId, episodeId } = useParams()
+    const { podcastId } = useParams()
     
     const getDurationString = (duration) => {
         const minutes = (duration / 60).toLocaleString('es-ES', {minimumIntegerDigits: 2, useGrouping:false})
@@ -20,8 +18,8 @@ export default function PodcastListEpisodes() {
     useEffect( () => {
         const getPodcast = async() => {
             try {
-                const podcastsRaw = await podcastService.getPodcast(podcastId)
-                setPodcast(podcastsRaw)
+                const podcastRaw = await podcastService.getPodcast(podcastId)
+                setPodcast(podcastRaw)
             } catch(err) {
                 console.log(`Error on retrieving podcast from api: ${err}`)
             }
@@ -38,9 +36,9 @@ export default function PodcastListEpisodes() {
             {podcast &&
                 <div className='podcast-detail'>
                     <PodcastCard podcast={podcast} />
-                    <div className='episodes'>
+                    <div className='other-info'>
                         <div className='num-episodes shadow-box'>
-                            Episodes: {podcast.episodes.length}
+                            <h2>Episodes: {podcast.episodes.length}</h2>
                         </div>
                         { podcast.episodes.length > 0 &&
                             <div className='table-episodes shadow-box'>

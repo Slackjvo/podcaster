@@ -152,12 +152,36 @@
             }
         }
 
-        .episodes {
+        .other-info {
             flex-grow: 1;
             min-width: 300px;
             display: grid;
             grid-template-columns: 100%;
             grid-gap: 30px;
+
+            .podcast-episode {
+                padding: 20px;
+
+                .title {
+                    margin: 0px 0px 20px 0px;
+                }
+
+                .description, .player {
+                    margin: 20px 0px;
+                }
+
+                .player{
+                    width: 100%;
+                    
+                    audio {
+                        width: 100%;
+                    }
+                    audio::-webkit-media-controls-play-button, audio::-webkit-media-controls-panel {
+                        background-color: #a4a4a4;
+                        color: #ffffff;
+                    }
+                }
+            }
 
             .num-episodes {
                 height: fit-content;
@@ -165,6 +189,10 @@
                 text-align: left;
                 font-weight: bold;
                 font-size: 20px;
+
+                h2 {
+                    margin: 0px;
+                }
             }
 
             .table-episodes {
