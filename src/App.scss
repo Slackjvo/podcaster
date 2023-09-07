@@ -29,6 +29,10 @@
         }
     }
 
+    .shadow-box {
+        box-shadow: 0px 4px 5px 2px #aaaaaa;
+    }
+
     .list-flex {
 
         display: flex;
@@ -64,7 +68,6 @@
             }
 
             .item-child-container {
-                box-shadow: 0px 4px 5px 2px #aaaaaa;
                 z-index: 2;
                 display: grid;
                 grid-template-columns: 100%;
@@ -92,7 +95,7 @@
         }
     }
 
-    .podcast {
+    .podcast-detail {
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
@@ -100,9 +103,8 @@
         justify-content: left;
 
 
-        .detail {
+        .podcast-card {
             width: 300px;
-            box-shadow: 0px 4px 5px 2px #aaaaaa;
             padding: 20px;
 
             img {
@@ -124,6 +126,7 @@
                 .title {
                     font-size: 17px;
                     color: black;
+                    text-decoration: none;
                     font-weight: bold;
                 }
 
@@ -149,11 +152,60 @@
             }
         }
 
-        .list {
+        .episodes {
             flex-grow: 1;
-            box-shadow: 0px 4px 5px 2px #aaaaaa;
-            padding: 20px;
             min-width: 300px;
+            display: grid;
+            grid-template-columns: 100%;
+            grid-gap: 30px;
+
+            .num-episodes {
+                height: fit-content;
+                padding: 20px;
+                text-align: left;
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+            .table-episodes {
+                padding: 20px;
+                
+                table {
+                    height: fit-content;
+                    text-align: left;
+                    border-collapse: collapse;
+                    width: 100%;
+
+                    td {
+                        border-bottom: 1px solid rgb(197, 197, 197);
+                        padding: 10px
+                    }
+
+                    tr:first-child {
+                        margin-bottom: 20px;
+                        th {
+                            padding-bottom: 8px;
+                            border-bottom: 2px solid grey;
+                        }
+                    }
+
+                    tr:nth-child(even) {
+                        background-color: #f6f6f6;
+                    }
+
+                    .episode-title {
+                        text-decoration: none;
+                    }
+
+                    .episode-date {
+                        width: 100px;
+                    }
+
+                    .episode-duration {
+                        width: 100px;
+                    }
+                }
+            }
         }
     }
 }

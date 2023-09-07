@@ -2,8 +2,9 @@ import { useState, useEffect} from 'react'
 import { podcastService } from '../../domain/services/PodcastService'
 import SearchBar from './SearchBar'
 import { Link } from "react-router-dom"
+import Podcast from '../../domain/models/Podcast'
 
-export default function PodcastList() {
+export default function PodcastsList() {
     const dayMiliseconds = 86400*1000
     const [podcasts, setPodcasts] = useState([])
     const [podcastsFiltered, setPodcastsFiltered] = useState([])
@@ -18,8 +19,9 @@ export default function PodcastList() {
                         const actualTimestamp = (new Date()).getTime()
                         if (podcastsExpireTimeInt+dayMiliseconds > actualTimestamp) {
                             const podcastLocalStorage = JSON.parse(localStorage.getItem('podcasts'))
-                            setPodcastsFiltered(podcastLocalStorage)
-                            return setPodcasts(podcastLocalStorage)
+                            const podcastsClasses = podcastLocalStorage.map( podcast => new Podcast(podcast))
+                            setPodcastsFiltered(podcastsClasses)
+                            return setPodcasts(podcastsClasses)
                         }
                     }
                 } catch(err) {
@@ -50,9 +52,9 @@ export default function PodcastList() {
                             return (
                                 <Link to={`/podcast/${podcast.id}`} className='item' key={podcast.id} >
                                     <div>
-                                        <img src={podcast.imageSrc} alt={`${podcast.title} Cover`} />
+                                        <img src={podcast.imageCover} alt={`${podcast.title} Cover`} />
                                     </div>
-                                    <div className='item-child-container'>
+                                    <div className='item-child-container shadow-box'>
                                         <p className='title'>{podcast.title}</p>
                                         <p className='author'>Author: {podcast.artist}</p>
                                     </div>
