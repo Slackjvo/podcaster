@@ -3,7 +3,7 @@ import Podcast from "../models/Podcast"
 import PodcastDetailModel from '../../domain/models/PodcastDetail'
 import PodcastEpisode from "../models/PodcastEpisode"
 
-const dayMiliseconds = 1//86400*1000
+const dayMiliseconds = 86400*1000
 
 const getPodcasts = async() => {
     const entityExpireTimeKey = 'podcastsExpireTime'

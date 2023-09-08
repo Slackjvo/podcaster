@@ -1,49 +1,43 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.css'
 import App from './App'
-import {
-    createBrowserRouter,
-    createRoutesFromElements,
-    Route,
-    RouterProvider,
-} from "react-router-dom"
+import { Route, Routes , BrowserRouter as Router} from "react-router-dom"
 import reportWebVitals from './reportWebVitals'
 import PodcastDetail from './infrastructure/components/PodcastListEpisodes'
 import PodcastEpisode from './infrastructure/components/PodcastEpisode'
 import { LoadingProvider } from './loadingContext'
+import PodcastsList from './infrastructure/components/PodcastsList'
 
 
 export const LoadingContext = React.createContext()
 
-const router = createBrowserRouter(
-    createRoutesFromElements(
-        <Route path="/" element={
-            <LoadingProvider>
-                <App />
-            </LoadingProvider>
-        }>
-            <Route path="/podcast/:podcastId" element={
-                <LoadingProvider>
-                    <PodcastDetail />
-                </LoadingProvider>
-            } />
-            <Route path="/podcast/:podcastId/episode/:episodeId" element={
-                <LoadingProvider>
-                    <PodcastEpisode />
-                </LoadingProvider>
-            } />
-        </Route>
+const router = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={
+                    <LoadingProvider>
+                        <App component={PodcastsList} />
+                    </LoadingProvider>
+                } />
+                <Route path="/podcast/:podcastId" element={
+                    <LoadingProvider>
+                        <App component={PodcastDetail} />
+                    </LoadingProvider>
+                } />
+                <Route path="/podcast/:podcastId/episode/:episodeId" element={
+                    <LoadingProvider>
+                        <App component={PodcastEpisode} />
+                    </LoadingProvider>
+                } />
+            </Routes>
+        </Router>
     )
-)
-  
+}
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        {router()}
     </React.StrictMode>
 )
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals()

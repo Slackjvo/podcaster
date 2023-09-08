@@ -21,14 +21,14 @@ export default function PodcastsList() {
             }
             dispatch({type: 'stop'})
         }
-
         getPodcasts()
+
     }, [])
 
 
     return (
         <>
-            {podcasts.length > 0 &&
+            {podcasts && podcasts.length > 0 &&
                 <>
                     <SearchBar options={podcasts} resultsFound={podcastsFiltered} setResults={setPodcastsFiltered} attributeToFilter={'title'} placeholderText={'Filter podcasts...'}/>
                     <div className='list-flex'>
