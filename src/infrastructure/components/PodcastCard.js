@@ -7,12 +7,12 @@ export default function PodcastCard({
 
     return (
         <div className='podcast-card shadow-box'>
-            <Link to={getPodcastDetailUrl(podcast.id)}>
+            <Link data-testid="podcast-cover-link" to={getPodcastDetailUrl(podcast.id)}>
                 <img src={podcast.imageCover} alt={`${podcast.title} Cover`} />
             </Link>
             <hr />
             <div className='info-podcast'>
-                <Link to={getPodcastDetailUrl(podcast.id)} className='title' >{podcast.title}</Link>
+                <Link data-testid="podcast-title-link" to={getPodcastDetailUrl(podcast.id)} className='title' >{podcast.title}</Link>
                 <p className='author'>by: {podcast.artist}</p>
             </div>
             <hr />

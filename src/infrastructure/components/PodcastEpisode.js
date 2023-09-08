@@ -9,7 +9,7 @@ export default function PodcastEpisode() {
     const [podcastEpisode, setPodcastEpisode] = useState(null)
     const { podcastId, episodeId } = useParams()
     const { dispatch } = useLoading()
-
+    
     useEffect( () => {
         const getPodcast = async() => {
             dispatch({type: 'start'})
@@ -48,9 +48,8 @@ export default function PodcastEpisode() {
                                 <div className='description' dangerouslySetInnerHTML={{__html: podcastEpisode.description}} />
                                 <hr />
                                 <div className='player'>
-                                    <audio controls>
+                                    <audio data-testid="player-audio-podcast" controls>
                                         <source src={podcastEpisode.urlAudio} type="audio/mpeg" />
-                                        Your browser does not support the audio element.
                                     </audio>
                                 </div>
                             </div>

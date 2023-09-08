@@ -1,20 +1,18 @@
 import React from 'react'
-import { render, waitFor, screen, act } from '@testing-library/react'
-import PodcastsList from '../infrastructure/components/PodcastsList'
-import { podcastService } from '../domain/services/PodcastService'
-import Podcast from '../domain/models/Podcast'
-import { LoadingProvider } from '../loadingContext'
-import { Route, Routes , BrowserRouter as Router} from "react-router-dom"
-import App from '../App'
+import { render, waitFor, act } from '@testing-library/react'
+import PodcastsList from '../PodcastsList'
+import { podcastService } from '../../../domain/services/PodcastService'
+import Podcast from '../../../domain/models/Podcast'
+import { LoadingProvider } from '../../../loadingContext'
+import { Route, Routes , MemoryRouter} from "react-router-dom"
+import App from '../../../App'
 
-jest.mock('../domain/services/PodcastService')
-/*jest.mock('../loadingContext', () => ({
-    useLoading: () => ({ dispatch: jest.fn() }),
-}))*/
+jest.mock('../../../domain/services/PodcastService')
+
 describe('PodcastsList', () => {
 
-    test('should render a podcast from the list', async () => {
-        podcastService.getPodcasts.mockResolvedValue([
+    it('should render a podcast from the list', async () => {
+        const mockPodcasts = [
             new Podcast(
                 {
                     id: 1,
@@ -23,14 +21,16 @@ describe('PodcastsList', () => {
                     imageCover: 'http://'
                 }
             )
-        ])
+        ]
+
+        podcastService.getPodcasts.mockResolvedValue(mockPodcasts)
 
         let component
 
         await act(async () => {
 
             component = render(
-                <Router>
+                <MemoryRouter initialEntries={[`/`]}>
                     <Routes>
                         <Route path="/" element={
                             <LoadingProvider>
@@ -38,18 +38,18 @@ describe('PodcastsList', () => {
                             </LoadingProvider>
                         } />
                     </Routes>
-                </Router>
+                </MemoryRouter>
             )
         
         })
 
         await waitFor(() => {
-            expect(component.getByText('Podcast 1')).toBeInTheDocument()
-            expect(component.getByText('Author: Author 1')).toBeInTheDocument()
+            expect(component.getByText(mockPodcasts[0].title)).toBeInTheDocument()
+            expect(component.getByText(`Author: ${mockPodcasts[0].artist}`)).toBeInTheDocument()
         })
     })
     
-    test('should bot render the list', async () => {
+    it('should bot render the list', async () => {
         podcastService.getPodcasts.mockResolvedValue(undefined)
         
         let containerComponent
@@ -57,7 +57,7 @@ describe('PodcastsList', () => {
         await act(async () => {
 
             const { container } = render(
-                <Router>
+                <MemoryRouter>
                     <Routes>
                         <Route path="/" element={
                             <LoadingProvider>
@@ -65,7 +65,7 @@ describe('PodcastsList', () => {
                             </LoadingProvider>
                         } />
                     </Routes>
-                </Router>
+                </MemoryRouter>
             )
 
             containerComponent = container
